@@ -9,33 +9,33 @@ int main(void) {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int digit_of_number, num_to_delete, num_of_delete = 0; 
-	string input_number;
-	stack<int> number_stack;
-	stack<int> final_number;
+	int N, K, res = 0; 
+	string num;
+	stack<int> s;
+	stack<int> fnum;
 	
-	cin >> digit_of_number >> num_to_delete >> input_number;
-	for(char inputChar : input_number) {
-        int num = inputChar - '0';
+	cin >> N >> K >> num;
+	for(char d : num) {
+        int num = d - '0';
 		
-		while(!number_stack.empty() && num_of_delete < num_to_delete && number_stack.top() < num) {
-			number_stack.pop();
-			num_of_delete++;
+		while(!s.empty() && res < K && s.top() < num) {
+			s.pop();
+			res++;
 		}
-			number_stack.push(num);
+			s.push(num);
 	}
-	while(num_of_delete < num_to_delete) {
-		number_stack.pop();
-		num_of_delete++;
+	while(res < K) {
+		s.pop();
+		res++;
 	}
 
-	while(!number_stack.empty()) {
-		final_number.push(number_stack.top());
-        number_stack.pop();
+	while(!s.empty()) {
+		fnum.push(s.top());
+        s.pop();
 	}
-	while(!final_number.empty()) {
-		cout << final_number.top();
-		final_number.pop();
+	while(!fnum.empty()) {
+		cout << fnum.top();
+		fnum.pop();
 	}
 	
 	return 0;
