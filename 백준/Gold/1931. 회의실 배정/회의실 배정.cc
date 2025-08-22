@@ -4,7 +4,7 @@
 
 using namespace std;
 
-bool is_not_intersecting(pair<int, int>, pair<int, int>);
+bool is_not_intersecting(const pair<int, int> &, const pair<int, int> &);
 
 int main(void)
 {
@@ -24,11 +24,11 @@ int main(void)
 	sort(information_of_meetings.begin(), information_of_meetings.end());
 
 	int max_meetings = 1;
-	int iter = 0;
+	int idx_last_meeting = 0;
 	for(int i = 1; i < number_of_meetings; i++) {
-		if(is_not_intersecting(information_of_meetings[iter], information_of_meetings[i])) {
+		if(is_not_intersecting(information_of_meetings[idx_last_meeting], information_of_meetings[i])) {
 			max_meetings++;
-			iter = i;
+			idx_last_meeting = i;
 		}
 	}
 
@@ -37,6 +37,6 @@ int main(void)
 	return 0;
 }
 
-bool is_not_intersecting(pair<int, int> a, pair<int, int> b) {
+bool is_not_intersecting(const pair<int, int> &a, const pair<int, int> &b) {
 	return a.first <= b.second;
 }
